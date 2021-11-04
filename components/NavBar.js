@@ -40,8 +40,8 @@ export default function NavBar() {
           {auth.user.name}
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <Link href="/profile">
-            <a className="dropdown-item">Profile</a>
+          <Link href="/account">
+            <a className="dropdown-item">Account</a>
           </Link>
           {auth.user.role === "admin" && adminRouter()}
           <div className="dropdown-divider"></div>
@@ -77,6 +77,11 @@ export default function NavBar() {
         id="navbarNavDropdown"
       >
         <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link href="/products">
+              <a className={"nav-link" + isActive("/products")}>Products</a>
+            </Link>
+          </li>
           <li className="nav-item">
             <Link href="/cart">
               <a className={"nav-link" + isActive("/cart")}>
