@@ -10,4 +10,7 @@ module.exports = {
     CLOUDINARY_API_KEY: "255914831661626",
     CLOUDINARY_API_SECRET: "qJnxSNXBCRr9sgNVfdYA5wQtt34",
   },
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
 };

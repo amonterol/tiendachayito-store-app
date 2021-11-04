@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "./icons/foto.png";
+import { useContext } from "react";
+import { DataContext } from "../store/GlobalState";
+import { addToCart } from "../store/Actions";
 
 const ProductItem = ({ product }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
+
   const userLink = () => {
     return (
       <>
@@ -14,7 +19,7 @@ const ProductItem = ({ product }) => {
         <button
           className="btn btn-success"
           style={{ marginLeft: "5px", flex: 1 }}
-          disabled={product.inStock === 0 ? true : false}
+          disabled={product.stock === 0 ? true : false}
           onClick={() => dispatch(addToCart(product, cart))}
         >
           Buy
@@ -24,11 +29,11 @@ const ProductItem = ({ product }) => {
   };
 
   return (
-    <div className="col-sm-3 mt-2">
+    <div className="col mt-2">
       <div className="card" style={{ width: "18rem" }}>
         <Image
           className="card-img-top"
-          src={Logo}
+          src={product.images.url}
           alt="Card image"
           width="200%"
           height="200%"

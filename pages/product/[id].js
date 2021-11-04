@@ -1,17 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
-import { getData } from "../../utils/fetchData";
 import { DataContext } from "../../store/GlobalState";
-//import { addToCart } from "../../store/Actions";
-import Foto from "./icons/foto.png";
+import { addToCart } from "../../store/Actions";
+import { getData } from "../../utils/fetchData";
 import ProductItem from "../../components/ProductItem";
 
 const DetailProduct = (props) => {
   const [product] = useState(props.product);
   const [products] = useState(props.products);
+
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
 
   return (
     <div>
@@ -47,7 +47,11 @@ const DetailProduct = (props) => {
           <div className="my-2">{product.description}</div>
           <div className="my-2">{product.content}</div>
 
-          <button type="button" className="btn btn-dark d-block my-3 px-5">
+          <button
+            type="button"
+            className="btn btn-dark d-block my-3 px-5"
+            onClick={() => dispatch(addToCart(product, cart))}
+          >
             Buy
           </button>
         </div>

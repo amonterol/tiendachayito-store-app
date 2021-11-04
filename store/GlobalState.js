@@ -16,6 +16,7 @@ export const DataProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(reducers, initialState);
+  const { cart, auth } = state;
 
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -32,6 +33,19 @@ export const DataProvider = ({ children }) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    const __tienda__chayito__cart01 = JSON.parse(
+      localStorage.getItem("__tienda__chayito__cart01")
+    );
+
+    if (__tienda__chayito__cart01)
+      dispatch({ type: "ADD_CART", payload: __tienda__chayito__cart01 });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("__tienda__chayito__cart01", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>
