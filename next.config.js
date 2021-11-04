@@ -9,6 +9,9 @@ module.exports = {
     CLOUDINARY_NAME: "abmontero",
     CLOUDINARY_API_KEY: "255914831661626",
     CLOUDINARY_API_SECRET: "qJnxSNXBCRr9sgNVfdYA5wQtt34",
+    CLOUD_UPDATE_PRESET: "tienda",
+    CLOUD_NAME: "abmontero",
+    CLOUD_API: "https://api.cloudinary.com/v1_1/abmontero/image/upload",
     PAYPAL_CLIENT_ID:
       "AZF0s8Kv2rApvQNmkrHXHjvMYFCT88Y_fNaXnASVMzFDmLx81vqYvh9wpkA2IZaO7Scplt1idgb2VaNz",
   },

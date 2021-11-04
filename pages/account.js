@@ -58,7 +58,6 @@ export default function Account() {
       "user",
       {
         name,
-        avatar: avatar ? media[0].url : auth.user.avatar,
       },
       auth.token
     ).then((res) => {
@@ -86,7 +85,7 @@ export default function Account() {
       <section className="row text-secondary my-3">
         <div className="col-md-4">
           <h3 className="text-center text-uppercase">
-            {auth.user.role === "user" ? "User Profile" : "Admin Profile"}
+            {auth.user.role === 0 ? "User Profile" : "Admin Profile"}
           </h3>
 
           <div className="form-group">
