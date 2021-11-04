@@ -24,7 +24,7 @@ const ProductItem = ({ product }) => {
   };
 
   return (
-    <div>
+    <div className="col-sm-3 mt-2">
       <div className="card" style={{ width: "18rem" }}>
         <Image
           className="card-img-top"
