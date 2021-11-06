@@ -9,7 +9,7 @@ export default function Layout({ children }) {
   return (
     <>
       <TopNavBar />
-      <div className="container">
+      <div className="container mb-5">
         <NavBar2 />
         <Notify />
         <Modal />

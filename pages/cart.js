@@ -88,22 +88,24 @@ export default function Cart() {
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
 
-    postData("order", { address, mobile, cart, total }, auth.token).then(
-      (res) => {
-        if (res.err)
-          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+    auth.user
+      ? postData("order", { address, mobile, cart, total }, auth.token).then(
+          (res) => {
+            if (res.err)
+              return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
-        dispatch({ type: "ADD_CART", payload: [] });
+            dispatch({ type: "ADD_CART", payload: [] });
 
-        const newOrder = {
-          ...res.newOrder,
-          user: auth.user,
-        };
-        dispatch({ type: "ADD_ORDERS", payload: [...orders, newOrder] });
-        dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-        return router.push(`/order/${res.newOrder._id}`);
-      }
-    );
+            const newOrder = {
+              ...res.newOrder,
+              user: auth.user,
+            };
+            dispatch({ type: "ADD_ORDERS", payload: [...orders, newOrder] });
+            dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+            return router.push(`/order/${res.newOrder._id}`);
+          }
+        )
+      : null;
   };
 
   if (cart.length === 0) {

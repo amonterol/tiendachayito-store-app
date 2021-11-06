@@ -52,7 +52,7 @@ export default function Signin() {
   }, [auth, router]);
 
   return (
-    <div>
+    <div style={{ height: "55vh" }}>
       <Head>
         <title>Sign in page</title>
       </Head>

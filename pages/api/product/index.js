@@ -13,9 +13,6 @@ export default async (req, res) => {
     case "POST":
       await createProduct(req, res);
       break;
-    case "GET":
-      await getWomanProducts(req, res);
-      break;
   }
 };
 

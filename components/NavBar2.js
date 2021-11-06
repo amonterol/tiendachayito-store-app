@@ -22,6 +22,7 @@ export default function NavBar2() {
   const handleLogout = () => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
+    localStorage.removeItem("__tienda__chayito__cart01");
     dispatch({ type: "AUTH", payload: {} });
     dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
     return router.push("/");

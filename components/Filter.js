@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import filterSearch from "../utils/filterSearch";
 import { getData } from "../utils/fetchData";
@@ -24,7 +25,7 @@ const Filter = ({ state }) => {
 
   useEffect(() => {
     filterSearch({ router, search: search ? search.toLowerCase() : "all" });
-  }, [search, router]);
+  }, [search]);
 
   return (
     <div className="input-group">

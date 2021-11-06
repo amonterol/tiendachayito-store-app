@@ -44,7 +44,7 @@ export default function Register() {
   }, [auth, router]);
 
   return (
-    <div>
+    <div style={{ height: "55vh" }}>
       <Head>
         <title>Register Page</title>
       </Head>

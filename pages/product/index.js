@@ -141,4 +141,5 @@ export async function getServerSideProps({ query }) {
     }, // will be passed to the page component as props
   };
 }
+
 export default Products;
