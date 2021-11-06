@@ -4,12 +4,20 @@ export const getData = async (url, token) => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: "GET",
     headers: {
+      "Content-Type": "application/json",
       Authorization: token,
     },
   });
 
-  const data = await res.json();
-  return data;
+  try {
+    const data = await res.json();
+    return data;
+    console.log("response data?", data);
+  } catch (error) {
+    console.log("Error happened here!");
+    console.error(error);
+  }
+  //const data = await res.json();
 };
 
 export const postData = async (url, post, token) => {

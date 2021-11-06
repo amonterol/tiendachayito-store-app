@@ -8,8 +8,8 @@ export default function CartItem({ item, dispatch, cart }) {
     <tr>
       <td style={{ width: "100px", overflow: "hidden" }}>
         <img
-          src={item.images.url}
-          alt={item.title}
+          src={item.images[0].url}
+          alt={item.images[0].url}
           className="img-thumbnail w-100"
           style={{ minWidth: "80px", height: "80px" }}
         />

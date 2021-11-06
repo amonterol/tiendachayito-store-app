@@ -9,7 +9,7 @@ export const ACTIONS = {
 };
 
 export const addToCart = (product, cart) => {
-  if (product.inStock === 0)
+  if (product.stock === 0)
     return {
       type: "NOTIFY",
       payload: { error: "This product is out of stock." },

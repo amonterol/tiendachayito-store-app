@@ -6,7 +6,7 @@ import Logo from "./icons/logoTienda.png";
 import { DataContext } from "../store/GlobalState";
 import Cookie from "js-cookie";
 
-export default function NavBar() {
+export default function NavBar2() {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
   const { auth, cart } = state;
@@ -70,9 +70,12 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-sm bg-white justify-content-center ">
+    <nav
+      className="navbar navbar-expand-lg navbar-light"
+      style={{ background: "white" }}
+    >
       <Link href="/">
-        <a className="navbar-brand">
+        <a className="navbar-brand m-0 p-0" style={{ background: "white" }}>
           <Image src={Logo} alt="Logo" width="180px" height="125px" />
         </a>
       </Link>
@@ -88,7 +91,6 @@ export default function NavBar() {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-
       <div
         className="collapse navbar-collapse justify-content-end"
         id="navbarNavDropdown"

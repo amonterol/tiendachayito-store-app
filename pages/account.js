@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../store/GlobalState";
 import Link from "next/link";
@@ -21,7 +20,8 @@ export default function Account() {
 
   useEffect(() => {
     if (auth.user) setData({ ...data, name: auth.user.name });
-  }, [auth.user, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth.user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +38,7 @@ export default function Account() {
       updatePassword();
     }
 
-    if (name !== auth.user.name || avatar) updateInfor();
+    if (name !== auth.user.name) updateInfor();
   };
 
   const updatePassword = () => {
@@ -51,7 +51,6 @@ export default function Account() {
   };
 
   const updateInfor = async () => {
-    let media;
     dispatch({ type: "NOTIFY", payload: { loading: true } });
 
     patchData(
@@ -85,7 +84,7 @@ export default function Account() {
       <section className="row text-secondary my-3">
         <div className="col-md-4">
           <h3 className="text-center text-uppercase">
-            {auth.user.role === 0 ? "User Profile" : "Admin Profile"}
+            {auth.user.role === "user" ? "User Profile" : "Admin Profile"}
           </h3>
 
           <div className="form-group">

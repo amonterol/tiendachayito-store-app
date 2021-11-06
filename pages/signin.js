@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../store/GlobalState";
 import { postData } from "../utils/fetchData";
 import Cookie from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Signin() {
   const initialState = { email: "", password: "" };

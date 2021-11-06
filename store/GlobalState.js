@@ -32,6 +32,15 @@ export const DataProvider = ({ children }) => {
         });
       });
     }
+    getData("categories").then((res) => {
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+      dispatch({
+        type: "ADD_CATEGORIES",
+        payload: res.categories,
+      });
+    });
   }, []);
 
   useEffect(() => {
@@ -46,6 +55,30 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("__tienda__chayito__cart01", JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    if (auth.token) {
+      getData("order", auth.token).then((res) => {
+        if (res.err)
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+        dispatch({ type: "ADD_ORDERS", payload: res.orders });
+      });
+
+      if (auth.user.role === "admin") {
+        getData("user", auth.token).then((res) => {
+          if (res.err)
+            return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+          dispatch({ type: "ADD_USERS", payload: res.users });
+        });
+      }
+    } else {
+      dispatch({ type: "ADD_ORDERS", payload: [] });
+      dispatch({ type: "ADD_USERS", payload: [] });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth.token]);
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>
