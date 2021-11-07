@@ -25,7 +25,7 @@ img {
 @import url("./product.css");
 
 /* ----------- Products Manager ------------- */
-@import url("./products_manager.css");
+@import url("./create-product.css");
 
 /* ----------- Home Pager ------------- */
 @import url("./home.css");

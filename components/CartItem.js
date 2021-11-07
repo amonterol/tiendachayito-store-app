@@ -15,10 +15,10 @@ export default function CartItem({ item, dispatch, cart }) {
         />
       </td>
 
-      <td style={{ minWidth: "200px" }} className="w-50 align-middle">
-        <h5 className="text-capitalize text-secondary">
+      <td style={{ minWidth: "200px" }} className="w-50 align-start">
+        <h5 className="text-capitalize text-dark text-left p-0 m-0">
           <Link href={`/product/${item._id}`}>
-            <a>{item.title}</a>
+            <a className="text-left">{item.title}</a>
           </Link>
         </h5>
 

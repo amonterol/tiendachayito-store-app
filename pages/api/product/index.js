@@ -81,33 +81,78 @@ const createProduct = async (req, res) => {
     if (result.role !== "admin")
       return res.status(400).json({ err: "Authentication is not valid." });
 
-    const { title, price, stock, description, content, category, images } =
-      req.body;
+    const {
+      product_id,
+      title,
+      brand,
+      price,
+      stock,
+      gender,
+      category,
+      description,
+      content,
+      images,
+    } = req.body;
 
-    if (
-      !title ||
-      !price ||
-      !stock ||
-      !description ||
-      !content ||
-      category === "all" ||
-      images.length === 0
-    )
-      return res.status(400).json({ err: "Please add all the fields." });
+    if (!product_id)
+      return res
+        .status(400)
+        .json({ err: "El SKU del producto es un campo requerido." });
+
+    if (!title)
+      return res
+        .status(400)
+        .json({ err: "El TITLE del producto es un campo requerido." });
+
+    if (!brand)
+      return res
+        .status(400)
+        .json({ err: "La MARCA del producto es un campo requerido." });
+    if (!price)
+      return res
+        .status(400)
+        .json({ err: "El PRECIO del producto es un campo requerido." });
+    if (!stock)
+      return res
+        .status(400)
+        .json({ err: "La CANTIDAD del producto es un campo requerido." });
+    if (!gender)
+      return res
+        .status(400)
+        .json({ err: "El GENERO del producto es un campo requerido." });
+    if (category === "all")
+      return res
+        .status(400)
+        .json({ err: "La CATEGORIA del producto es un campo requerido." });
+    if (!description)
+      return res
+        .status(400)
+        .json({ err: "La DESCRIPCION del producto es un campo requerido." });
+    if (!content)
+      return res
+        .status(400)
+        .json({ err: "El CONTENIDO del producto es un campo requerido." });
+    if (images.length === 0)
+      return res
+        .status(400)
+        .json({ err: "La IMAGEN del producto es un campo requerido." });
 
     const newProduct = new Products({
       title: title.toLowerCase(),
+      product_id,
+      title,
+      brand,
       price,
       stock,
+      gender,
+      category,
       description,
       content,
-      category,
       images,
     });
 
     await newProduct.save();
-
-    res.json({ msg: "Success! Created a new product" });
+    res.json({ msg: "¡Éxito! El producto ha sido creado." });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

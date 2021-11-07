@@ -76,7 +76,7 @@ export default function Account() {
 
   if (!auth.user) return null;
   return (
-    <div className="profile_page">
+    <div className="container" style={{ minHeight: "55vh" }}>
       <Head>
         <title>Account</title>
       </Head>

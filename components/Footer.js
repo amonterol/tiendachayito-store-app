@@ -2,11 +2,12 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-center text-white mt-5">
+    <footer
+      className=" text-center text-white mt-5 "
+      style={{ backgroundColor: "#0a4275" }}
+    >
       <div className="container p-4 pb-0">
-        {/*  <!-- Section: Social media --> */}
         <section className="mb-4">
-          {/*  <!-- Facebook --> */}
           <a
             className="btn btn-outline-light btn-floating m-1"
             href="#!"
@@ -17,7 +18,6 @@ export default function Footer() {
             </i>
           </a>
 
-          {/*  <!-- Twitter --> */}
           <a
             className="btn btn-outline-light btn-floating m-1"
             href="#!"
@@ -26,16 +26,6 @@ export default function Footer() {
             <i className="fab fa-twitter" aria-hidden="true"></i>
           </a>
 
-          {/* <!-- Google --> */}
-          <a
-            className="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-          >
-            <i className="fab fa-google" aria-hidden="true"></i>
-          </a>
-
-          {/*  <!-- Instagram --> */}
           <a
             className="btn btn-outline-light btn-floating m-1"
             href="#!"
@@ -44,22 +34,12 @@ export default function Footer() {
             <i className="fab fa-instagram" aria-hidden="true"></i>
           </a>
 
-          {/*  <!-- Linkedin --> */}
           <a
             className="btn btn-outline-light btn-floating m-1"
             href="#!"
             role="button"
           >
-            <i className="fab fa-linkedin-in" aria-hidden="true"></i>
-          </a>
-
-          {/*   <!-- Github --> */}
-          <a
-            className="btn btn-outline-light btn-floating m-1"
-            href="#!"
-            role="button"
-          >
-            <i className="fab fa-github" aria-hidden="true"></i>
+            <i className="fab fa-whatsapp" aria-hidden="true"></i>
           </a>
         </section>
       </div>

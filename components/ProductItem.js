@@ -84,7 +84,7 @@ const ProductItem = ({ product, handleChecks }) => {
         />
         <div className=".card-img-top">
           <h4 className="card-title">{product.title}</h4>
-          <h6 className="card-text">{product.price}</h6>
+          <h6 className="card-text p-3">Price: ${product.price}</h6>
 
           <div className="row justify-content-between mx-0">
             {!auth.user || auth.user.role !== "admin"

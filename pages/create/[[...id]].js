@@ -71,15 +71,15 @@ const CreateProduct = () => {
     if (files.length === 0)
       return dispatch({
         type: "NOTIFY",
-        payload: { error: "Files does not exist." },
+        payload: { error: "No se ha cargado ningún archivo." },
       });
 
     files.forEach((file) => {
       if (file.size > 1024 * 1024)
-        return (err = "The largest image size is 1mb");
+        return (err = "El tamaño de la imagen excede 1mb");
 
       if (file.type !== "image/jpeg" && file.type !== "image/png")
-        return (err = "Image format is incorrect.");
+        return (err = "El formato del imagen debe ser png o jpeg.");
 
       num += 1;
       if (num <= 5) newImages.push(file);
@@ -92,7 +92,7 @@ const CreateProduct = () => {
     if (imgCount + newImages.length > 5)
       return dispatch({
         type: "NOTIFY",
-        payload: { error: "Select up to 5 images." },
+        payload: { error: "Seleccione 5 imágenes o menos." },
       });
     setImages([...images, ...newImages]);
   };
@@ -108,25 +108,53 @@ const CreateProduct = () => {
     if (auth.user.role !== "admin")
       return dispatch({
         type: "NOTIFY",
-        payload: { error: "Authentication is not valid." },
+        payload: {
+          error: "Solo el usuario administrador puede acceder esta función.",
+        },
       });
 
-    if (
-      !product_id ||
-      !title ||
-      !brand ||
-      !price ||
-      !stock ||
-      !gender ||
-      category === "all" ||
-      !description ||
-      !content ||
-      images.length === 0
-    )
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Please add all the fields." },
-      });
+    if (!product_id)
+      return res
+        .status(400)
+        .json({ err: "El SKU del producto es un campo requerido." });
+
+    if (!title)
+      return res
+        .status(400)
+        .json({ err: "El TITLE del producto es un campo requerido." });
+
+    if (!brand)
+      return res
+        .status(400)
+        .json({ err: "La MARCA del producto es un campo requerido." });
+    if (!price)
+      return res
+        .status(400)
+        .json({ err: "El PRECIO del producto es un campo requerido." });
+    if (!stock)
+      return res
+        .status(400)
+        .json({ err: "La CANTIDAD del producto es un campo requerido." });
+    if (!gender)
+      return res
+        .status(400)
+        .json({ err: "El GENERO del producto es un campo requerido." });
+    if (category === "all")
+      return res
+        .status(400)
+        .json({ err: "La CATEGORIA del producto es un campo requerido." });
+    if (!description)
+      return res
+        .status(400)
+        .json({ err: "La DESCRIPCION del producto es un campo requerido." });
+    if (!content)
+      return res
+        .status(400)
+        .json({ err: "El CONTENIDO del producto es un campo requerido." });
+    if (images.length === 0)
+      return res
+        .status(400)
+        .json({ err: "La IMAGEN del producto es un campo requerido." });
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
     let media = [];
@@ -158,7 +186,7 @@ const CreateProduct = () => {
   };
 
   return (
-    <div className="products_manager">
+    <div className="create-product">
       <Head>
         <title>Products Manager</title>
       </Head>
@@ -177,15 +205,15 @@ const CreateProduct = () => {
             type="text"
             name="title"
             value={title}
-            placeholder="Title"
+            placeholder="Nombre"
             className="d-block my-4 w-100 p-2"
             onChange={handleChangeInput}
           />
           <input
             type="text"
-            name="bramd"
+            name="brand"
             value={brand}
-            placeholder="Brand"
+            placeholder="Marca"
             className="d-block my-4 w-100 p-2"
             onChange={handleChangeInput}
           />
@@ -197,8 +225,7 @@ const CreateProduct = () => {
                 type="number"
                 name="price"
                 value={price}
-                min="1"
-                placeholder="Price"
+                placeholder="Precio"
                 className="d-block w-100 p-2"
                 onChange={handleChangeInput}
               />
@@ -211,7 +238,7 @@ const CreateProduct = () => {
                 name="stock"
                 value={stock}
                 min="1"
-                placeholder="stock"
+                placeholder="Cantidad"
                 className="d-block w-100 p-2"
                 onChange={handleChangeInput}
               />
@@ -225,8 +252,9 @@ const CreateProduct = () => {
               onChange={handleChangeInput}
               className="custom-select text-capitalize"
             >
-              <option value="">Please select a gender</option>
-              <option value="noaplica">No aplica</option>
+              <option value="">Seleccione una categoría para el género</option>
+              <option value="noaplica">Telas</option>
+              <option value="noaplica">Accesorios</option>
               <option value="caballeros">Caballeros</option>
               <option value="damas">Damas</option>
               <option value="nina">Niña</option>
@@ -241,7 +269,7 @@ const CreateProduct = () => {
               onChange={handleChangeInput}
               className="custom-select text-capitalize"
             >
-              <option value="all">All Products</option>
+              <option value="all">Categorías</option>
               {categories.map((item) => (
                 <option key={item._id} value={item._id}>
                   {item.name}
@@ -255,7 +283,7 @@ const CreateProduct = () => {
             id="description"
             cols="30"
             rows="4"
-            placeholder="Description"
+            placeholder="Descripción"
             onChange={handleChangeInput}
             className="d-block my-4 w-100 p-2"
             value={description}
@@ -266,7 +294,7 @@ const CreateProduct = () => {
             id="content"
             cols="30"
             rows="6"
-            placeholder="Content"
+            placeholder="Detalle"
             onChange={handleChangeInput}
             className="d-block my-4 w-100 p-2"
             value={content}

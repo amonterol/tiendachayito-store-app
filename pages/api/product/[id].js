@@ -25,7 +25,9 @@ const getProduct = async (req, res) => {
 
     const product = await Products.findById(id);
     if (!product)
-      return res.status(400).json({ err: "This product does not exist." });
+      return res
+        .status(400)
+        .json({ err: "El producto no se encuentra en la base de datos!" });
 
     res.json({ product });
   } catch (err) {
@@ -37,37 +39,83 @@ const updateProduct = async (req, res) => {
   try {
     const result = await auth(req, res);
     if (result.role !== "admin")
-      return res.status(400).json({ err: "Authentication is not valid." });
+      return res
+        .status(400)
+        .json({ err: "La autenticación del usuario no es válida." });
 
     const { id } = req.query;
-    const { title, price, stock, description, content, category, images } =
-      req.body;
+    const {
+      product_id,
+      title,
+      brand,
+      price,
+      stock,
+      gender,
+      category,
+      description,
+      content,
+    } = req.body;
 
-    if (
-      !title ||
-      !price ||
-      !stock ||
-      !description ||
-      !content ||
-      category === "all" ||
-      images.length === 0
-    )
-      return res.status(400).json({ err: "Please add all the fields." });
+    if (!product_id)
+      return res
+        .status(400)
+        .json({ err: "El SKU del producto es un campo requerido." });
+
+    if (!title)
+      return res
+        .status(400)
+        .json({ err: "El TITLE del producto es un campo requerido." });
+
+    if (!brand)
+      return res
+        .status(400)
+        .json({ err: "La MARCA del producto es un campo requerido." });
+    if (!price)
+      return res
+        .status(400)
+        .json({ err: "El PRECIO del producto es un campo requerido." });
+    if (!stock)
+      return res
+        .status(400)
+        .json({ err: "La CANTIDAD del producto es un campo requerido." });
+    if (!gender)
+      return res
+        .status(400)
+        .json({ err: "El GENERO del producto es un campo requerido." });
+    if (category === "all")
+      return res
+        .status(400)
+        .json({ err: "La CATEGORIA del producto es un campo requerido." });
+    if (!description)
+      return res
+        .status(400)
+        .json({ err: "La DESCRIPCION del producto es un campo requerido." });
+    if (!content)
+      return res
+        .status(400)
+        .json({ err: "El CONTENIDO del producto es un campo requerido." });
+    if (images.length === 0)
+      return res
+        .status(400)
+        .json({ err: "La IMAGEN del producto es un campo requerido." });
 
     await Products.findOneAndUpdate(
       { _id: id },
       {
         title: title.toLowerCase(),
+        product_id,
+        title,
+        brand,
         price,
         stock,
+        gender,
+        category,
         description,
         content,
-        category,
-        images,
       }
     );
 
-    res.json({ msg: "Success! Updated a product" });
+    res.json({ msg: "¡Éxito!E producto ha sido actualizado" });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }
@@ -78,12 +126,14 @@ const deleteProduct = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-      return res.status(400).json({ err: "Authentication is not valid." });
+      return res
+        .status(400)
+        .json({ err: "La autenticación del usuario no es válida!." });
 
     const { id } = req.query;
 
     await Products.findByIdAndDelete(id);
-    res.json({ msg: "Deleted a product." });
+    res.json({ msg: "El producto ha sido eliminado!" });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }
