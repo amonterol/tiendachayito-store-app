@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "./icons/logoTienda.png";
+
 import { DataContext } from "../store/GlobalState";
 import Cookie from "js-cookie";
 
