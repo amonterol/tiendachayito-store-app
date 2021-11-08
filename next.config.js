@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   env: {
-    BASE_URL: "https://tiendachayito-store-app.vercel.app",
+    BASE_URL: "https://tiendachayito-store-app.vercel.app/",
     MONGODB_URL:
       "mongodb+srv://admin:DHlWbzMLttsgNLOi@cluster0.9mg5a.mongodb.net/tienda-chayito?retryWrites=true&w=majority",
     ACCESS_TOKEN_SECRET: "b&7nvedd2A8Z-}NmQL)Q%",
