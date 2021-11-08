@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link";
 import Image from "next/image";
@@ -75,7 +76,7 @@ const ProductItem = ({ product, handleChecks }) => {
             onChange={() => handleCheck(product._id)}
           />
         )}
-        <Image
+        <img
           className=" card-img-top"
           src={product.images[0].url}
           alt={product.images[0].url}
