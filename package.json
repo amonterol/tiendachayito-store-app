@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start - $PORT",
+    "lint": "next lint",
+    "heroku-postbuild": "npm run buld"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.2",
