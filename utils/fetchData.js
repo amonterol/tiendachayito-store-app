@@ -13,7 +13,6 @@ export const getData = async (url, token) => {
     const data = await res.json();
     return data;
   } catch (error) {}
-  //const data = await res.json();
 };
 
 export const postData = async (url, post, token) => {
