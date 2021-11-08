@@ -9,7 +9,7 @@ const Users = () => {
 
   if (!auth.user) return null;
   return (
-    <div className="table-responsive" style={{ minHeight: "55vh" }}>
+    <div className="table-responsive" style={{ minHeight: "60vh" }}>
       <Head>
         <title>Users</title>
       </Head>
