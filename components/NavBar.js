@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -75,7 +76,7 @@ export default function NavBar2() {
       className="navbar navbar-expand-lg navbar-light"
       style={{ background: "white" }}
     >
-      <Link href="/">
+      {/*       <Link href="/">
         <a
           className="navbar-brand m-0 p-0"
           style={{
@@ -86,6 +87,17 @@ export default function NavBar2() {
           }}
         >
           TIENDA CHAYITO{" "}
+        </a>
+      </Link> */}
+
+      <Link href="/">
+        <a className="navbar-brand m-0 p-0" style={{ background: "white" }}>
+          <img
+            src="https://res.cloudinary.com/abmontero/image/upload/v1636401273/test/jcxo28vztougsdzvsuhc.png"
+            alt="Tienda Chayito"
+            width="180px"
+            height="125px"
+          />
         </a>
       </Link>
 
