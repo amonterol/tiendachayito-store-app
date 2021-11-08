@@ -24,7 +24,8 @@ const EditUser = () => {
         setCheckAdmin(user.role === "admin" ? true : false);
       }
     });
-  }, [users, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [users]);
 
   const handleCheck = () => {
     setCheckAdmin(!checkAdmin);

@@ -6,10 +6,10 @@ import Link from "next/link";
 const Users = () => {
   const { state, dispatch } = useContext(DataContext);
   const { users, auth, modal } = state;
-
+  console.log(auth.user);
   if (!auth.user) return null;
   return (
-    <div className="table-responsive">
+    <div className="table-responsive" style={{ minHeight: "55vh" }}>
       <Head>
         <title>Users</title>
       </Head>
@@ -47,7 +47,7 @@ const Users = () => {
               <th>
                 <Link
                   href={
-                    auth.user.root && auth.user.email !== user.email
+                    auth.user.email !== user.email && auth.user.root
                       ? `/edit_user/${user._id}`
                       : "#!"
                   }

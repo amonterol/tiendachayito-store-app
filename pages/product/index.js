@@ -94,7 +94,7 @@ const Products = (props) => {
         </div>
       )}
 
-      <div className="products m-0 p-0">
+      <div className="products mt-3 mb-3 p-0">
         {products.length === 0 ? (
           <h2>No Products</h2>
         ) : (
