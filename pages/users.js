@@ -9,7 +9,7 @@ const Users = () => {
 
   if (!auth.user) return null;
   return (
-    <div className="table-responsive">
+    <div className="table-responsive" style={{ minHeight: "60vh" }}>
       <Head>
         <title>Usuarios</title>
       </Head>
@@ -47,7 +47,7 @@ const Users = () => {
               <th>
                 <Link
                   href={
-                    auth.user.root && auth.user.email !== user.email
+                    auth.user.email !== user.email && auth.user.root
                       ? `/edit_user/${user._id}`
                       : "#!"
                   }
