@@ -175,7 +175,11 @@ export default function Cart() {
   };
 
   if (cart.length === 0) {
-    return <h2> You cart is empty</h2>;
+    return (
+      <div className="container" style={{ minHeight: "60vh" }}>
+        <h2> You cart is empty</h2>;
+      </div>
+    );
   } else {
     return (
       <div className="row mx-auto" style={{ minHeight: "60vh" }}>
