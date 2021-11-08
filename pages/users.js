@@ -6,7 +6,7 @@ import Link from "next/link";
 const Users = () => {
   const { state, dispatch } = useContext(DataContext);
   const { users, auth, modal } = state;
-  console.log(auth.user);
+
   if (!auth.user) return null;
   return (
     <div className="table-responsive" style={{ minHeight: "55vh" }}>
