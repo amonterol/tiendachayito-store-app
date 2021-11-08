@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar2 from "./NavBar2";
+import NavBar from "./NavBar";
 import Notify from "./Notify";
 import Modal from "./Modal";
 import TopNavBar from "./TopNavBar";
@@ -10,7 +10,7 @@ export default function Layout({ children }) {
     <>
       <TopNavBar />
       <div className="container mb-5">
-        <NavBar2 />
+        <NavBar />
         <Notify />
         <Modal />
         {children}

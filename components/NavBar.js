@@ -6,7 +6,7 @@ import Logo from "./icons/logoTienda.png";
 import { DataContext } from "../store/GlobalState";
 import Cookie from "js-cookie";
 
-export default function NavBar() {
+export default function NavBar2() {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
   const { auth, cart } = state;
@@ -22,6 +22,7 @@ export default function NavBar() {
   const handleLogout = () => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
+    localStorage.removeItem("__tienda__chayito__cart01");
     dispatch({ type: "AUTH", payload: {} });
     dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
     return router.push("/");
@@ -70,10 +71,21 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-sm bg-white justify-content-center ">
+    <nav
+      className="navbar navbar-expand-lg navbar-light"
+      style={{ background: "white" }}
+    >
       <Link href="/">
-        <a className="navbar-brand">
-          <Image src={Logo} alt="Logo" width="180px" height="125px" />
+        <a
+          className="navbar-brand m-0 p-0"
+          style={{
+            background: "white",
+            color: "green",
+            fontSize: "2.5rem",
+            fontWeight: "500",
+          }}
+        >
+          TIENDA CHAYITO{" "}
         </a>
       </Link>
 
@@ -88,7 +100,6 @@ export default function NavBar() {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-
       <div
         className="collapse navbar-collapse justify-content-end"
         id="navbarNavDropdown"
@@ -112,19 +123,16 @@ export default function NavBar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/boys-girls-products">
-              <a className={"nav-link" + isActive("/boys-girls-products")}>
-                Juvenil
-              </a>
+            <Link href="/girls-products">
+              <a className={"nav-link" + isActive("/girls-products")}>Niñas</a>
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/children-products">
-              <a className={"nav-link" + isActive("/children-products")}>
-                Infantil
-              </a>
+            <Link href="/boys-products">
+              <a className={"nav-link" + isActive("/boys-products")}>Niños</a>
             </Link>
           </li>
+
           <li className="nav-item">
             <Link href="/accesories-products">
               <a className={"nav-link" + isActive("/accesories-products")}>
@@ -136,6 +144,13 @@ export default function NavBar() {
             <Link href="/fabrics-products">
               <a className={"nav-link" + isActive("/fabrics-products")}>
                 Telas
+              </a>
+            </Link>
+          </li>
+          <li className="nav-item" style={{ marginRight: "2.5rem" }}>
+            <Link href="/uniform-products">
+              <a className={"nav-link" + isActive("/uniform-products")}>
+                Uniformes
               </a>
             </Link>
           </li>
