@@ -114,7 +114,7 @@ export default function Home(props) {
       </section>
 
       {/* PRODUCTOS DESTACADOS ROPA MUJERES */}
-      <h2 className="title">FEATURED PRODUCTS - WOMENS CLOTHING</h2>
+      <h2 className="title">PRODUCTOS DESTACADOS - ROPA DE DAMAS</h2>
 
       <div className="products">
         {products.length === 0 ? (
@@ -131,7 +131,7 @@ export default function Home(props) {
       </div>
 
       {/* PRODUCTOS DESTACADOS  HOMBRES */}
-      <h2 className="title">FEATURED PRODUCTS - MEN CLOTHING </h2>
+      <h2 className="title">PRODUCTOS DESTACADOS - ROPA DE CABALLEROS</h2>
       <div className="products">
         {products.length === 0 ? (
           <h2>No Products</h2>

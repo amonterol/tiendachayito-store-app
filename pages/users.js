@@ -11,7 +11,7 @@ const Users = () => {
   return (
     <div className="table-responsive">
       <Head>
-        <title>Users</title>
+        <title>Usuarios</title>
       </Head>
 
       <table className="table w-100">
@@ -19,10 +19,10 @@ const Users = () => {
           <tr>
             <th></th>
             <th>ID</th>
-            <th>Name</th>
+            <th>Nombre</th>
             <th>Email</th>
             <th>Admin</th>
-            <th>Action</th>
+            <th>Acción</th>
           </tr>
         </thead>
 
