@@ -6,6 +6,7 @@ export const getData = async (url, token) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: token,
+      "Access-Control-Allow-Origin": "*",
     },
   });
 
