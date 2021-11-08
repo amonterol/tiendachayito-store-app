@@ -53,8 +53,6 @@ const createOrder = async (req, res) => {
       total,
     });
 
-    console.log(newOrder.provincia, newOrder.canton, newOrder.distrito);
-
     cart.filter((item) => {
       return sold(item._id, item.quantity, item.stock, item.sold);
     });

@@ -12,11 +12,7 @@ export const getData = async (url, token) => {
   try {
     const data = await res.json();
     return data;
-    console.log("response data?", data);
-  } catch (error) {
-    console.log("Error happened here!");
-    console.error(error);
-  }
+  } catch (error) {}
   //const data = await res.json();
 };
 

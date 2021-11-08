@@ -80,7 +80,7 @@ export default function NavBar2() {
           className="navbar-brand m-0 p-0"
           style={{
             background: "white",
-            color: "green",
+            color: "#23a646",
             fontSize: "2.5rem",
             fontWeight: "500",
           }}
