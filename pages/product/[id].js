@@ -22,7 +22,7 @@ const DetailProduct = (props) => {
   };
 
   return (
-    <div className="row" style={{ minHeight: "57vh" }}>
+    <div className="row detail_page" style={{ minHeight: "57vh" }}>
       <Head>
         <title>Detail Product</title>
       </Head>
@@ -32,7 +32,7 @@ const DetailProduct = (props) => {
           src={product.images[tab].url}
           alt={product.images[tab].url}
           className="d-block img-thumbnail rounded mt-4 w-100"
-          style={{ height: "350px" }}
+          style={{ height: "600px" }}
         />
 
         <div className="row mx-0" style={{ cursor: "pointer" }}>
@@ -75,7 +75,7 @@ const DetailProduct = (props) => {
         </button>
       </div>
       <div className=" mt-5 mb-">
-        <h2 className="w-100 text-center">Related products</h2>
+        <h2 className="w-100 text-center">Los clientes también ha comprado</h2>
         <div className="products">
           {products.map((prod) => {
             return prod.category === product.category &&

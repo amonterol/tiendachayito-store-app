@@ -62,7 +62,7 @@ const Products = (props) => {
   return (
     <div className="container-fluid m-0 p-0">
       <Head>
-        <title>Home Page</title>
+        <title>Product Page</title>
       </Head>
 
       <Filter state={state} />

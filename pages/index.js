@@ -13,19 +13,33 @@ import Filter from "../components/Filter";
 
 export default function Home(props) {
   const [products, setProducts] = useState(props.products);
+
+  const [page, setPage] = useState(1);
+  const router = useRouter();
+
+  useEffect(() => {
+    setProducts(props.products);
+  }, [props.products]);
+
+  const handleLoadmore = () => {
+    setPage(page + 1);
+    filterSearch({ router, page: page + 1 });
+  };
+
   return (
     <div className="container m-0 p-0">
       {/*  ---------------------------------- women and men clothes secction ------------------------------------ */}
       <section className="upper-container">
         <div className="fila1">
-          <Link href="/women-products">
+          <Link id="btn_view" href="/women-products">
             <a className="imagen">
               <img
                 src="https://res.cloudinary.com/abmontero/image/upload/v1632349547/fdsFolder/ujwjri1zimwbxgbtlqxp.jpg"
                 alt="ropa de mujer"
               />
               <div className="box">
-                NUEVA COLECCION - ROPA DE MUJER Descúbrelo ahora
+                <h4 className="text-center">NUEVA COLECCION - ROPA DE MUJER</h4>
+                <p> Descúbrelo ahora</p>
               </div>
             </a>
           </Link>
@@ -38,9 +52,9 @@ export default function Home(props) {
                 alt="ropa de hombre"
               />
               <div className="box">
-                <h3 className="text-center">
+                <h4 className="text-center">
                   NUEVA COLECCION - ROPA DE HOMBRE
-                </h3>
+                </h4>
                 <p> Descúbrelo ahora</p>
               </div>
             </a>
@@ -59,7 +73,9 @@ export default function Home(props) {
               />
 
               <div className="box">
-                <h4 className="text-center">NUEVA COLECCION - ROPA JUVENIL</h4>
+                <h5 className="text-center">
+                  NUEVA COLECCION - ROPA NIÑAS Y NIÑOS
+                </h5>
                 <p> Descúbrelo ahora</p>
               </div>
             </a>
@@ -74,7 +90,7 @@ export default function Home(props) {
               />
 
               <div className="box">
-                <h4 className="text-center">NUEVA COLECCION - TELAS</h4>
+                <h5 className="text-center">NUEVA COLECCION - TELAS</h5>
                 <p> Descúbrelo ahora</p>
               </div>
             </a>
@@ -89,7 +105,7 @@ export default function Home(props) {
               />
 
               <div className="box">
-                <h4 className="text-center">NUEVA COLECCION - Accesorios</h4>
+                <h5 className="text-center">NUEVA COLECCION - Accesorios</h5>
                 <p> Descúbrelo ahora</p>
               </div>
             </a>
@@ -98,7 +114,7 @@ export default function Home(props) {
       </section>
 
       {/* PRODUCTOS DESTACADOS ROPA MUJERES */}
-      <h2 className="title">FEATURED PRODUCTS - WOMEN&aposS CLOTHING</h2>
+      <h2 className="title">FEATURED PRODUCTS - WOMENS CLOTHING</h2>
 
       <div className="products">
         {products.length === 0 ? (
@@ -115,7 +131,7 @@ export default function Home(props) {
       </div>
 
       {/* PRODUCTOS DESTACADOS  HOMBRES */}
-      <h2 className="title">FEATURED PRODUCTS - MEN&aposS CLOTHING </h2>
+      <h2 className="title">FEATURED PRODUCTS - MEN CLOTHING </h2>
       <div className="products">
         {products.length === 0 ? (
           <h2>No Products</h2>
@@ -133,18 +149,9 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps({ query }) {
-  const page = query.page || 1;
-  const category = query.category || "all";
-  const sort = query.sort || "";
-  const search = query.search || "all";
+export async function getServerSideProps() {
+  const res = await getData("home-page");
 
-  const res = await getData(
-    `product?limit=${
-      page * 6
-    }&category=${category}&sort=${sort}&title=${search}`
-  );
-  // server side rendering
   return {
     props: {
       products: res.products,

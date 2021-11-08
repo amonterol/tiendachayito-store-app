@@ -27,6 +27,10 @@ const login = async (req, res) => {
       return res
         .status(400)
         .json({ err: "El PASSWORD es un campo requerido." });
+    if (password.length < 6)
+      return res.status(400).json({
+        err: "El número de caracteres del password es inferior al requerido.",
+      });
 
     const user = await Users.findOne({ email });
     if (!user)

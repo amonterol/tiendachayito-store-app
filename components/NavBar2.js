@@ -115,19 +115,16 @@ export default function NavBar2() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/boys-girls-products">
-              <a className={"nav-link" + isActive("/boys-girls-products")}>
-                Juvenil
-              </a>
+            <Link href="/girls-products">
+              <a className={"nav-link" + isActive("/girls-products")}>Niñas</a>
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/children-products">
-              <a className={"nav-link" + isActive("/children-products")}>
-                Infantil
-              </a>
+            <Link href="/boys-products">
+              <a className={"nav-link" + isActive("/boys-products")}>Niños</a>
             </Link>
           </li>
+
           <li className="nav-item">
             <Link href="/accesories-products">
               <a className={"nav-link" + isActive("/accesories-products")}>
@@ -139,6 +136,13 @@ export default function NavBar2() {
             <Link href="/fabrics-products">
               <a className={"nav-link" + isActive("/fabrics-products")}>
                 Telas
+              </a>
+            </Link>
+          </li>
+          <li className="nav-item" style={{ marginRight: "2.5rem" }}>
+            <Link href="/uniform-products">
+              <a className={"nav-link" + isActive("/uniform-products")}>
+                Uniformes
               </a>
             </Link>
           </li>

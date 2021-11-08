@@ -24,7 +24,7 @@ const Filter = ({ state }) => {
   };
 
   useEffect(() => {
-    filterSearch({ router, search: search ? search.toLowerCase() : "all" });
+    filterSearch({ router, search: search ? search : "all" });
   }, [search]);
 
   return (
@@ -35,7 +35,7 @@ const Filter = ({ state }) => {
           value={category}
           onChange={handleCategory}
         >
-          <option value="all">All Products</option>
+          <option value="all">Todos productos</option>
 
           {categories.map((item) => (
             <option key={item._id} value={item._id}>
@@ -50,7 +50,8 @@ const Filter = ({ state }) => {
           type="text"
           className="form-control"
           list="title_product"
-          value={search.toLowerCase()}
+          value={search}
+          placeholder="Buscar"
           onChange={(e) => setSearch(e.target.value)}
         />
       </form>
@@ -61,11 +62,11 @@ const Filter = ({ state }) => {
           value={sort}
           onChange={handleSort}
         >
-          <option value="-createdAt">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="-sold">Best sales</option>
-          <option value="-price">Price: Hight-Low</option>
-          <option value="price">Price: Low-Hight</option>
+          <option value="-createdAt">Mas recientes</option>
+          <option value="oldest">Más antiguos</option>
+          <option value="-sold">Mejor vendidos</option>
+          <option value="-price">Precio: Alto-Bajo</option>
+          <option value="price">Precio: Bajo-Alto</option>
         </select>
       </div>
     </div>

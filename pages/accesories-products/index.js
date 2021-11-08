@@ -1,10 +1,9 @@
 import Head from "next/head";
 import { useState } from "react";
-
 import { getData } from "../../utils/fetchData";
 import ProductItem from "../../components/ProductItem";
 
-const FabricsProducts = (props) => {
+const AccesoriesProducts = (props) => {
   const [products, setProducts] = useState(props.products);
 
   return (
@@ -18,7 +17,7 @@ const FabricsProducts = (props) => {
           <h2>No Products</h2>
         ) : (
           products.map((product) =>
-            product.gender === "telas" ? (
+            product.gender === "accesorios" ? (
               <ProductItem key={product._id} product={product} />
             ) : (
               ""
@@ -31,7 +30,7 @@ const FabricsProducts = (props) => {
 };
 
 export async function getServerSideProps() {
-  const res = await getData("fabrics-products");
+  const res = await getData("accesories-products");
 
   return {
     props: {
@@ -41,4 +40,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default FabricsProducts;
+export default AccesoriesProducts;

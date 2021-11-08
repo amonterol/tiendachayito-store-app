@@ -70,7 +70,11 @@ const Modal = () => {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title text-capitalize" id="exampleModalLabel">
+            <h5
+              className="modal-title text-capitalize"
+              id="exampleModalLabel }"
+              style={{ color: "black" }}
+            >
               {modal.length !== 0 && modal[0].title}
             </h5>
             <button

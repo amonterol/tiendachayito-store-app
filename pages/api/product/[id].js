@@ -54,50 +54,61 @@ const updateProduct = async (req, res) => {
       category,
       description,
       content,
+      images,
     } = req.body;
 
     if (!product_id)
-      return res
-        .status(400)
-        .json({ err: "El SKU del producto es un campo requerido." });
-
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El SKU del producto es un campo requerido." },
+      });
     if (!title)
-      return res
-        .status(400)
-        .json({ err: "El TITLE del producto es un campo requerido." });
-
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El NOMBRE del producto es un campo requerido." },
+      });
     if (!brand)
-      return res
-        .status(400)
-        .json({ err: "La MARCA del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La MARCA del producto es un campo requerido." },
+      });
     if (!price)
-      return res
-        .status(400)
-        .json({ err: "El PRECIO del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El PRECIO del producto es un campo requerido." },
+      });
     if (!stock)
-      return res
-        .status(400)
-        .json({ err: "La CANTIDAD del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La CANTIDAD del producto es un campo requerido." },
+      });
     if (!gender)
-      return res
-        .status(400)
-        .json({ err: "El GENERO del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El GENERO del producto es un campo requerido." },
+      });
     if (category === "all")
-      return res
-        .status(400)
-        .json({ err: "La CATEGORIA del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La CATEGORIA del producto es un campo requerido." },
+      });
     if (!description)
-      return res
-        .status(400)
-        .json({ err: "La DESCRIPCION del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: {
+          error: "La DESCRIPCION del producto es un campo requerido.",
+        },
+      });
     if (!content)
-      return res
-        .status(400)
-        .json({ err: "El CONTENIDO del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El CONTENIDO del producto es un campo requerido." },
+      });
     if (images.length === 0)
-      return res
-        .status(400)
-        .json({ err: "La IMAGEN del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La IMAGEN del producto es un campo requerido." },
+      });
 
     await Products.findOneAndUpdate(
       { _id: id },
@@ -112,6 +123,7 @@ const updateProduct = async (req, res) => {
         category,
         description,
         content,
+        images,
       }
     );
 

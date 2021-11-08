@@ -39,15 +39,21 @@ const getOrders = async (req, res) => {
 const createOrder = async (req, res) => {
   try {
     const result = await auth(req, res);
-    const { address, mobile, cart, total } = req.body;
+    const { provincia, canton, distrito, address, phone, cart, total } =
+      req.body;
 
     const newOrder = new Orders({
       user: result.id,
+      provincia,
+      canton,
+      distrito,
       address,
-      mobile,
+      phone,
       cart,
       total,
     });
+
+    console.log(newOrder.provincia, newOrder.canton, newOrder.distrito);
 
     cart.filter((item) => {
       return sold(item._id, item.quantity, item.stock, item.sold);

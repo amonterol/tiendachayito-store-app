@@ -4,13 +4,13 @@ import { useState } from "react";
 import { getData } from "../../utils/fetchData";
 import ProductItem from "../../components/ProductItem";
 
-const FabricsProducts = (props) => {
+const UniformProducts = (props) => {
   const [products, setProducts] = useState(props.products);
 
   return (
     <div className="home_page">
       <Head>
-        <title>Telas Page</title>
+        <title>Uniform Page</title>
       </Head>
 
       <div className="products">
@@ -18,7 +18,7 @@ const FabricsProducts = (props) => {
           <h2>No Products</h2>
         ) : (
           products.map((product) =>
-            product.gender === "telas" ? (
+            product.gender === "uniforme" ? (
               <ProductItem key={product._id} product={product} />
             ) : (
               ""
@@ -31,7 +31,7 @@ const FabricsProducts = (props) => {
 };
 
 export async function getServerSideProps() {
-  const res = await getData("fabrics-products");
+  const res = await getData("uniform-products");
 
   return {
     props: {
@@ -41,4 +41,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default FabricsProducts;
+export default UniformProducts;

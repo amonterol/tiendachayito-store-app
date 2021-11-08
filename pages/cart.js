@@ -15,8 +15,11 @@ export default function Cart() {
   const [subTotal, setSubTotal] = useState(0);
   const [tax, setTax] = useState(0);
 
+  const [provincia, setProvincia] = useState("");
+  const [canton, setCanton] = useState("");
+  const [distrito, setDistrito] = useState("");
   const [address, setAddress] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [phone, setPhone] = useState("");
 
   const [callback, setCallback] = useState(false);
   const router = useRouter();
@@ -94,10 +97,38 @@ export default function Cart() {
   }, [callback, dispatch]);
 
   const handlePayment = async () => {
-    if (!address || !mobile)
+    if (!auth.user)
       return dispatch({
         type: "NOTIFY",
-        payload: { error: "Please add your address and mobile." },
+        payload: {
+          error: "Por favor inicie sesión para poder adquirir productos.",
+        },
+      });
+
+    if (!provincia)
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Por favor agregue la provincia." },
+      });
+    if (!canton)
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Por favor agregue el cantón." },
+      });
+    if (!distrito)
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Por favor agregue el distrito." },
+      });
+    if (!address)
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Por favor agregue la dirección de envío." },
+      });
+    if (!phone)
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Por agregue el número de teléfono de contacto." },
       });
 
     let newCart = [];
@@ -113,7 +144,8 @@ export default function Cart() {
       return dispatch({
         type: "NOTIFY",
         payload: {
-          error: "The product is out of stock or the quantity is insufficient.",
+          error:
+            "La cantidad disponible de producto no es suficiente, por favor contáctenos.",
         },
       });
     }
@@ -121,22 +153,24 @@ export default function Cart() {
     dispatch({ type: "NOTIFY", payload: { loading: true } });
 
     auth.user
-      ? postData("order", { address, mobile, cart, total }, auth.token).then(
-          (res) => {
-            if (res.err)
-              return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      ? postData(
+          "order",
+          { provincia, canton, distrito, address, phone, cart, total },
+          auth.token
+        ).then((res) => {
+          if (res.err)
+            return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
-            dispatch({ type: "ADD_CART", payload: [] });
+          dispatch({ type: "ADD_CART", payload: [] });
 
-            const newOrder = {
-              ...res.newOrder,
-              user: auth.user,
-            };
-            dispatch({ type: "ADD_ORDERS", payload: [...orders, newOrder] });
-            dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-            return router.push(`/order/${res.newOrder._id}`);
-          }
-        )
+          const newOrder = {
+            ...res.newOrder,
+            user: auth.user,
+          };
+          dispatch({ type: "ADD_ORDERS", payload: [...orders, newOrder] });
+          dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+          return router.push(`/order/${res.newOrder._id}`);
+        })
       : null;
   };
 
@@ -150,7 +184,7 @@ export default function Cart() {
         </Head>
 
         <div className="col-md-8  table-responsive my-3">
-          <h2 className="text-uppercase">Shopping Cart</h2>
+          <h2 className=" text-capitalize">Carrito de compras</h2>
 
           <table className="table my-3">
             <tbody>
@@ -166,31 +200,60 @@ export default function Cart() {
           </table>
         </div>
 
-        <div className="col-md-4 my-3 text-right text-capitalize ">
+        <div className="col-md-4 my-3 text-center text-capitalize ">
           <form>
-            <h2>Shipping</h2>
+            <h2>Envío</h2>
 
-            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              name="provincia"
+              id="provincia"
+              className="form-control mb-2"
+              placeholder="Provincia"
+              value={provincia}
+              onChange={(e) => setProvincia(e.target.value)}
+            />
+            <input
+              type="text"
+              name="canton"
+              id="canton"
+              className="form-control mb-2"
+              placeholder="Cantón"
+              value={canton}
+              onChange={(e) => setCanton(e.target.value)}
+            />
+
+            <input
+              type="text"
+              name="distrito"
+              id="distrito"
+              className="form-control mb-2"
+              placeholder="Distrito"
+              value={distrito}
+              onChange={(e) => setDistrito(e.target.value)}
+            />
+
             <input
               type="text"
               name="address"
               id="address"
               className="form-control mb-2"
+              placeholder="Dirección"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
 
-            <label htmlFor="mobile">Mobile</label>
             <input
               type="text"
-              name="mobile"
-              id="mobile"
+              name="phone"
+              id="phone"
               className="form-control mb-2"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
+              placeholder="Teléfono"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </form>
-          <h4 className="text-dark  text-capitalize text-left ml-0 pl-0">
+          <h4 className="text-dark  text-capitalize text-left mt-5 ml-0 pl-0">
             Subtotal: <span>₡{subTotal}</span>
           </h4>
           <h4 className="text-dark  text-capitalize text-left ml-0 pl-0 ">
@@ -200,14 +263,28 @@ export default function Cart() {
           <h4 className="text-dark  text-capitalize text-left ml-0 pl-0">
             Total: <span className="ml-4 pl-3">₡{total}</span>
           </h4>
-
-          <Link href={auth.user ? "#!" : "/signin"}>
-            <a className="btn btn-primary my-2" onClick={handlePayment}>
-              Proceed with payment
-            </a>
-          </Link>
+          <h1
+            className="justify-content-center"
+            style={{ marginLeft: "2rem", marginRight: "2rem" }}
+          >
+            <Link href={auth.user ? "#!" : "/signin"}>
+              <a
+                className="btn btn-primary my-5 justify-content-start"
+                onClick={handlePayment}
+                style={{ marginLeft: "2rem", marginRight: "2rem" }}
+              >
+                Proceed with payment
+              </a>
+            </Link>
+          </h1>
         </div>
-        <div>
+
+        <div
+          style={{
+            borderStyle: "groove",
+            padding: "1rem",
+          }}
+        >
           <h4 className="text-dark text-capitalize">
             Terminos y condiciones de envío
           </h4>

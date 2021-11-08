@@ -114,47 +114,57 @@ const CreateProduct = () => {
       });
 
     if (!product_id)
-      return res
-        .status(400)
-        .json({ err: "El SKU del producto es un campo requerido." });
-
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El SKU del producto es un campo requerido." },
+      });
     if (!title)
-      return res
-        .status(400)
-        .json({ err: "El TITLE del producto es un campo requerido." });
-
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El NOMBRE del producto es un campo requerido." },
+      });
     if (!brand)
-      return res
-        .status(400)
-        .json({ err: "La MARCA del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La MARCA del producto es un campo requerido." },
+      });
     if (!price)
-      return res
-        .status(400)
-        .json({ err: "El PRECIO del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El PRECIO del producto es un campo requerido." },
+      });
     if (!stock)
-      return res
-        .status(400)
-        .json({ err: "La CANTIDAD del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La CANTIDAD del producto es un campo requerido." },
+      });
     if (!gender)
-      return res
-        .status(400)
-        .json({ err: "El GENERO del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El GENERO del producto es un campo requerido." },
+      });
     if (category === "all")
-      return res
-        .status(400)
-        .json({ err: "La CATEGORIA del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La CATEGORIA del producto es un campo requerido." },
+      });
     if (!description)
-      return res
-        .status(400)
-        .json({ err: "La DESCRIPCION del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: {
+          error: "La DESCRIPCION del producto es un campo requerido.",
+        },
+      });
     if (!content)
-      return res
-        .status(400)
-        .json({ err: "El CONTENIDO del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "El CONTENIDO del producto es un campo requerido." },
+      });
     if (images.length === 0)
-      return res
-        .status(400)
-        .json({ err: "La IMAGEN del producto es un campo requerido." });
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La IMAGEN del producto es un campo requerido." },
+      });
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
     let media = [];
@@ -220,7 +230,7 @@ const CreateProduct = () => {
 
           <div className="row">
             <div className="col-sm-6">
-              <label htmlFor="price">Price</label>
+              <label htmlFor="price">Precio</label>
               <input
                 type="number"
                 name="price"
@@ -232,7 +242,7 @@ const CreateProduct = () => {
             </div>
 
             <div className="col-sm-6">
-              <label htmlFor="price">In Stock</label>
+              <label htmlFor="price">Inventario</label>
               <input
                 type="number"
                 name="stock"
@@ -253,12 +263,13 @@ const CreateProduct = () => {
               className="custom-select text-capitalize"
             >
               <option value="">Seleccione una categoría para el género</option>
-              <option value="noaplica">Telas</option>
-              <option value="noaplica">Accesorios</option>
+              <option value="telas">Telas</option>
+              <option value="accesorios">Accesorios</option>
               <option value="caballeros">Caballeros</option>
               <option value="damas">Damas</option>
               <option value="nina">Niña</option>
               <option value="nino">Niño</option>
+              <option value="uniforme">Uniforme</option>
             </select>
           </div>
           <div className="input-group-prepend px-0 my-2">
@@ -308,7 +319,7 @@ const CreateProduct = () => {
         <div className="col-md-6 my-4">
           <div className="input-group mb-3">
             <div className="input-group-prepend">
-              <span className="input-group-text">Upload</span>
+              <span className="input-group-text">Imágenes</span>
             </div>
             <div className="custom-file border rounded">
               <input

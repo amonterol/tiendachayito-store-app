@@ -6,7 +6,7 @@ export default function TopNav() {
     <>
       <div
         className="d-flex justify-content-between"
-        style={{ background: "#2196f3" }}
+        style={{ background: "#0c71a5" }}
       >
         <div>
           <ul className="nav justify-content-center">

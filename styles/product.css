@@ -36,6 +36,6 @@
 
 /* --------- Detail Product ----------- */
 .detail_page .img-thumbnail.active {
-  border-color: orangered;
+  border-color: red;
   padding: 2px;
 }

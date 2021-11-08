@@ -52,8 +52,11 @@ export default function OrderDetail({ orderDetail, state, dispatch }) {
               <h3>Shipping</h3>
               <p>Name: {order.user.name}</p>
               <p>Email: {order.user.email}</p>
-              <p>Address: {order.address}</p>
-              <p>Mobile: {order.mobile}</p>
+              <p>Provincia: {order.provincia}</p>
+              <p>Cantón: {order.canton}</p>
+              <p>Distritodress: {order.distrito}</p>
+              <p>Dirección: {order.address}</p>
+              <p>Teléfono: {order.phone}</p>
 
               <div
                 className={`alert ${
